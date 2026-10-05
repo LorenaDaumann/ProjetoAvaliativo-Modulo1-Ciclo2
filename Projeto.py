@@ -37,6 +37,8 @@ df2 = df2.drop_duplicates()
 
 print("\n\n\nANÁLISE DE DADOS EXPLORATÓRIA")
 
+print("ANÁLISE QUERY 1")
+####### Por localização
 print("Quantidade de departamentos que estão localizados em 1700:")
 quantidade = (df["LOCATION_ID"] == 1700).sum()
 print(quantidade)
@@ -49,8 +51,44 @@ print("Quantidade de departamentos que estão localizados acima de 2500:")
 quantidade3 = (df["LOCATION_ID"] >= 2500).sum()
 print(quantidade3)
 
+######## Dados nulos
+print("\nDados nulos: ", df.isnull().sum()) #aqueles que estão nulos pode ser que não estejam ativos ainda
+
+######## Agrupamento de departamentos de âmbito comum
+# Nota da aluna: sim, eu uso a palavra âmbito no meu cotidiano, não creia ser IA por esse termo
+
+#Início de auxilío da IA
+# Função para mapear cada departamento para sua macroárea
+def mapear_area(depto):
+    depto = str(depto).strip()
+    
+    if depto in ["IT", "IT Support", "NOC", "IT Helpdesk"]:
+        return "Tecnologia da Informação"
+    elif depto in ["Finance", "Accounting", "Treasury", "Corporate Tax", "Control And Credit", "Shareholder Services", "Payroll"]:
+        return "Finanças e Contabilidade"
+    elif depto in ["Marketing", "Public Relations", "Sales", "Government Sales", "Retail Sales"]:
+        return "Vendas e Marketing"
+    elif depto in ["Human Resources", "Benefits", "Recruiting"]:
+        return "Recursos Humanos"
+    elif depto in ["Purchasing", "Shipping", "Manufacturing", "Construction", "Contracting", "Operations"]:
+        return "Operações e Logística"
+    elif depto in ["Administration", "Executive"]:
+        return "Administração Geral"
+    else:
+        return "Outros"
+
+# Criando a nova coluna no seu DataFrame df2
+df2["AREA_NEGOCIO"] = df["DEPARTMENT_NAME"].apply(mapear_area)
+
+# Exemplo de Análise Exploratória: Contar departamentos por área
+print("\nQuantidade de departamentos por Área de Negócio:")
+print(df2["AREA_NEGOCIO"].value_counts())
+#Fim do auxílio da IA
+
+###########################################
+print("\n\n\nANÁLISE QUERY 2")
 ######## Média
-print("\nMédia de salários entre cargos:")
+print("Média de salários entre cargos:")
 mediadoscargos = (df2["MIN_SALARY"] + df2["MAX_SALARY"]) / 2
 mediaecargos = df2[["JOB_TITLE"]].copy() #o .copy serve para criar um DataFrame totalmente independente
 
