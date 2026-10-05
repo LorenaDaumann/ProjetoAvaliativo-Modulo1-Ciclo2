@@ -1,0 +1,86 @@
+-- Query 2 - EMPLOYEES, DEPARTMENTS, JOBS, LOCATIONS, COUNTRIES e REGIONS
+-- EMPLOYEES com LEFT JOIN em DEPARTMENTS, LOCATIONS, COUNTRIES e REGIONS.
+
+
+SELECT
+    JOB_ID,
+    JOB_TITLE,
+    MIN_SALARY,
+    MAX_SALARY
+FROM
+    HR.JOBS;
+
+SELECT
+    DEPARTMENT_ID,
+    DEPARTMENT_NAME,
+    MANAGER_ID,
+    LOCATION_ID
+FROM
+    HR.DEPARTMENTS;
+
+SELECT
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    EMAIL,
+    PHONE_NUMBER,
+    HIRE_DATE,
+    JOB_ID,
+    SALARY,
+    COMMISSION_PCT,
+    MANAGER_ID,
+    DEPARTMENT_ID
+FROM
+    HR.EMPLOYEES;    
+
+SELECT
+    REGION_ID,
+    REGION_NAME
+FROM
+    HR.REGIONS;
+
+SELECT
+    COUNTRY_ID,
+    COUNTRY_NAME,
+    REGION_ID
+FROM
+    HR.COUNTRIES;
+
+SELECT
+    LOCATION_ID,
+    STREET_ADDRESS,
+    POSTAL_CODE,
+    CITY,
+    STATE_PROVINCE,
+    COUNTRY_ID
+FROM
+    HR.LOCATIONS;
+
+
+
+SELECT 
+    funcionarios.EMPLOYEE_ID, 
+    funcionarios.FIRST_NAME, 
+    funcionarios.LAST_NAME, 
+    funcionarios.SALARY, 
+    funcionarios.DEPARTMENT_ID, 
+    departamentos.DEPARTMENT_NAME,
+    cargo.JOB_TITLE,        
+    locais.CITY,            
+    paises.COUNTRY_NAME,
+    regioes.REGION_NAME
+FROM HR.EMPLOYEES funcionarios 
+LEFT JOIN 
+    HR.DEPARTMENTS departamentos ON funcionarios.DEPARTMENT_ID = departamentos.DEPARTMENT_ID 
+LEFT JOIN 
+    HR.JOBS cargo ON funcionarios.JOB_ID = cargo.JOB_ID 
+LEFT JOIN 
+    HR.LOCATIONS locais ON departamentos.LOCATION_ID = locais.LOCATION_ID 
+LEFT JOIN 
+    HR.COUNTRIES paises ON locais.COUNTRY_ID = paises.COUNTRY_ID         
+LEFT JOIN 
+    HR.REGIONS regioes ON paises.REGION_ID = regioes.REGION_ID           
+WHERE 
+    departamentos.LOCATION_ID IS NOT NULL
+ORDER BY 
+    funcionarios.FIRST_NAME;
