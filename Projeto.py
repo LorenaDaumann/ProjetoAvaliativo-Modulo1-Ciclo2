@@ -37,35 +37,45 @@ df2 = df2.drop_duplicates()
 
 print("\n\n\nANÁLISE DE DADOS EXPLORATÓRIA")
 
-print("Quantos estão localizados em 1700?")
+print("Quantidade de departamentos que estão localizados em 1700:")
 quantidade = (df["LOCATION_ID"] == 1700).sum()
 print(quantidade)
 
-# Média
-print("\nQual a média de salários entre cargos?")
+print("Quantidade de departamentos que estão localizados acima de 2000:")
+quantidade2 = (df["LOCATION_ID"] >= 2000).sum()
+print(quantidade2)
+
+print("Quantidade de departamentos que estão localizados acima de 2500:")
+quantidade3 = (df["LOCATION_ID"] >= 2500).sum()
+print(quantidade3)
+
+######## Média
+print("\nMédia de salários entre cargos:")
 mediadoscargos = (df2["MIN_SALARY"] + df2["MAX_SALARY"]) / 2
 mediaecargos = df2[["JOB_TITLE"]].copy() #o .copy serve para criar um DataFrame totalmente independente
 
 mediaecargos["MEDIA_SALARIO"] = mediadoscargos
 print(mediaecargos.to_string()) #o .to_string() serve para exibir o resultado na tela como texto puro
 
-# Valor mínimo
-print("\nQual o piso salarial de cada cargo?")
+
+####### Valor mínimo
+print("\nPiso salarial de cada cargo:")
 print(df2[["JOB_TITLE", "MIN_SALARY"]])
 
-print(f"\nQual a média de piso salarial? {df2['MIN_SALARY'].mean():.2f}")
+print(f"\nMédia de piso salarial: {df2['MIN_SALARY'].mean():.2f}")
 
-# Valor máximo
-print("\nQual o teto salarial de cada cargo?")
+
+####### Valor máximo
+print("\nTeto salarial de cada cargo:")
 print(df2[["JOB_TITLE", "MAX_SALARY"]])
 
-print(f"\nQual a média de teto salarial? {df2['MAX_SALARY'].mean():.2f}")
-
+print(f"\nMédia de teto salarial: {df2['MAX_SALARY'].mean():.2f}")
 
 
 print("\n\nTotal de cargos:", len(df2))
 
-#MEDIANA
+
+####### MEDIANA
 df2["MEDIA_SALARIO"] = (df2["MIN_SALARY"] + df2["MAX_SALARY"]) / 2
 print("Mediana da média de salários:", df2["MEDIA_SALARIO"].median())
 
