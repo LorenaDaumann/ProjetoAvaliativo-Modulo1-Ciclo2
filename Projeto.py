@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 df = pd.read_csv("query_01.csv")
 df2 = pd.read_csv("query_02.csv")
@@ -54,9 +55,7 @@ print(quantidade3)
 ######## Dados nulos
 print("\nDados nulos: ", df.isnull().sum()) #aqueles que estão nulos pode ser que não estejam ativos ainda
 
-######## Agrupamento de departamentos de âmbito comum
-# Nota da aluna: sim, eu uso a palavra âmbito no meu cotidiano, não creia ser IA por esse termo
-
+######## Agrupamento de departamentos de âmbito comum ------ Nota da aluna: sim, eu uso a palavra âmbito no meu cotidiano, não creia ser IA por esse termo
 #Início de auxilío da IA
 # Função para mapear cada departamento para sua macroárea
 def mapear_area(depto):
@@ -77,13 +76,15 @@ def mapear_area(depto):
     else:
         return "Outros"
 
-# Criando a nova coluna no seu DataFrame df2
-df2["AREA_NEGOCIO"] = df["DEPARTMENT_NAME"].apply(mapear_area)
+# Criando a nova coluna no DataFrame de departamentos
+df["AREA_NEGOCIO"] = df["DEPARTMENT_NAME"].apply(mapear_area)
 
-# Exemplo de Análise Exploratória: Contar departamentos por área
+# Contar departamentos por área
 print("\nQuantidade de departamentos por Área de Negócio:")
-print(df2["AREA_NEGOCIO"].value_counts())
+print(df["AREA_NEGOCIO"].value_counts())
 #Fim do auxílio da IA
+
+
 
 ###########################################
 print("\n\n\nANÁLISE QUERY 2")
@@ -129,11 +130,27 @@ print(cargos_piso.to_string(index=False))
 
 
 
+################################################
+######### VIZUALIZAÇÕES
 
+# Faixas salariais por cargo - Média, Piso e Teto Salarial
+media = df2.pivot_table( index="JOB_TITLE", values=["MIN_SALARY", "MEDIA_SALARIO", "MAX_SALARY"], aggfunc="mean")
 
-# Criar pelo menos um gráfico, podendo ser:
-# Histograma;
-# Boxplot;
-# Barras;
-# Linhas;
-# Dispersão…
+plt.figure(figsize=(14, 8))
+plt.tight_layout() # Evita que a parte de baixo com os nomes seja cortada da imagem
+sns.heatmap(media, annot=True, fmt=".0f", cmap="YlOrRd",cbar_kws={"label": "Salário"})
+
+plt.title("Faixas salariais por cargo")
+plt.savefig("heatmap_salario_medio.png")
+plt.show()
+
+########## Concentração de departamentos por área de atuação
+plt.figure(figsize=(10, 5))
+df["AREA_NEGOCIO"].value_counts().plot(kind="bar", color="royalblue")
+
+plt.xticks(rotation=45, ha='right') # Deixa os nomes em 45 graus e alinha pela direita para encaixar certinho
+
+plt.title("Quantidade de Ocorrências por Área de Negócio")
+plt.ylabel("Quantidade")
+plt.tight_layout() 
+plt.show()
