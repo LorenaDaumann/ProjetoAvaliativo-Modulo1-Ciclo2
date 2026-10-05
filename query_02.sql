@@ -11,14 +11,6 @@ FROM
     HR.JOBS;
 
 SELECT
-    DEPARTMENT_ID,
-    DEPARTMENT_NAME,
-    MANAGER_ID,
-    LOCATION_ID
-FROM
-    HR.DEPARTMENTS;
-
-SELECT
     EMPLOYEE_ID,
     FIRST_NAME,
     LAST_NAME,
@@ -56,7 +48,13 @@ SELECT
 FROM
     HR.LOCATIONS;
 
-
+SELECT
+    DEPARTMENT_ID,
+    DEPARTMENT_NAME,
+    MANAGER_ID,
+    LOCATION_ID
+FROM
+    HR.DEPARTMENTS;
 
 SELECT 
     funcionarios.EMPLOYEE_ID, 
@@ -69,7 +67,8 @@ SELECT
     locais.CITY,            
     paises.COUNTRY_NAME,
     regioes.REGION_NAME
-FROM HR.EMPLOYEES funcionarios 
+FROM HR.EMPLOYEES funcionarios
+    
 LEFT JOIN 
     HR.DEPARTMENTS departamentos ON funcionarios.DEPARTMENT_ID = departamentos.DEPARTMENT_ID 
 LEFT JOIN 
