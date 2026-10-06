@@ -61,13 +61,51 @@ Primeiro foi realizada a visualização inicial dos dados, mostrando aspectos co
 
 
 ---
-## Principais resultados encontrados;
+## Principais resultados encontrados
 
+A análise exploratória dos dados de Recursos Humanos revelou insights estratégicos sobre a estrutura organizacional e a remuneração da empresa:
+
+* **Concentração de Departamentos por Área de Atuação:** Através da contagem de ocorrências por área de negócio (`value_counts()`), identificou-se quais setores concentram o maior volume de movimentações e departamentos ativos, permitindo ao RH visualizar com clareza o peso operacional de cada vertical de negócio.
+* **Mapeamento de Cargos e Faixas Salariais:** O cruzamento de dados gerou uma visão consolidada de remuneração. Foi possível identificar não apenas a média salarial real praticada para cada título de cargo (`JOB_TITLE`), mas também confrontar esses valores diretamente com o piso (mínimo) e o teto (máximo) salariais estipulados na tabela de cargos.
+* **Identificação de Inconsistências/Registros Nulos:** A análise de dados nulos apontou registros com `MANAGER_ID` ausente, o que sugeriu a existência de departamentos ou colaboradores ainda em fase de ativação ou reestruturação interna.
+* **Distribuição Geográfica:** O rastreamento de ponta a ponta (vinculando funcionários desde suas cidades até suas respectivas macrorregiões) evidenciou como a dispersão geográfica influencia a leitura das médias salariais e onde estão alocados os principais polos de talentos da organização.
 
 ---
-## Como executar o projeto, incluindo os pré-requisitos, a instalação das bibliotecas e os comandos necessários.
 
+## Como executar o projeto
 
+Siga as instruções abaixo para configurar o ambiente local e executar a análise de dados.
+
+### Pré-requisitos
+Antes de começar, você precisa ter instalado em sua máquina:
+* **Python 3.x** (recomenda-se a versão utilizada no desenvolvimento ou superior)
+* **Git** (para clonar o repositório)
+
+### Instalação das Bibliotecas
+Os dados extraídos do banco de dados FreeSQL são processados em Python utilizando bibliotecas analíticas e de visualização de dados. Instale-as executando o comando abaixo no seu terminal:
+
+```bash
+pip install pandas matplotlib seaborn
+```
+
+### Comandos Necessários para Execução
+
+1. **Clone o repositório para o seu computador:**
+   ```bash
+   git clone https://github.com
+   ```
+
+2. **Navegue até a pasta do projeto:**
+   ```bash
+   cd ProjetoAvaliativo-Modulo1-Ciclo2
+   ```
+
+3. **Execute o script principal de análise:**
+   ```bash
+   python Projeto.py
+   ```
+
+*Nota: Certifique-se de manter os arquivos `query_01.csv` e `query_02.csv` na mesma raiz do arquivo `Projeto.py` (conforme a estrutura do repositório), pois o script fará a leitura local desses arquivos para gerar as estatísticas e salvar os gráficos automaticamente.*
 
 
 ---
