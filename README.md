@@ -107,8 +107,13 @@ pip install pandas matplotlib seaborn
 
 *Nota: Certifique-se de manter os arquivos `query_01.csv` e `query_02.csv` na mesma raiz do arquivo `Projeto.py` (conforme a estrutura do repositório), pois o script fará a leitura local desses arquivos para gerar as estatísticas e salvar os gráficos automaticamente.*
 
-
 ---
 ## Imagens dos gráficos gerados para a visualização dos resultados:
 <img width="1000" height="500" alt="bargrafic_concentracao_departamentos" src="https://github.com/user-attachments/assets/475227e7-3314-4ceb-b880-e2931c29f7f4" />
 <img width="2001" height="1267" alt="heatmap_salario_medio" src="https://github.com/user-attachments/assets/7223cabf-ab86-4543-ba21-de236015a231" />
+
+
+
+---
+## Video explicativo 
+https://drive.google.com/drive/folders/1sE9cG6errjFXhy3BztpIXONYtWad_Ub6?usp=drive_link
